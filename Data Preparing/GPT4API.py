@@ -1,16 +1,12 @@
 # %pip install openai
 
-
-# %%
 import openai
 import pandas as pd
 from tqdm import tqdm
 import csv
 
-# %%
 openai.api_key = "my GPT4 API key" # set the model here
 
-# %%
 def gpt_4(input):
 
     model = "gpt-4" # set the model
@@ -35,12 +31,10 @@ def gpt_4(input):
 
     return rephrased_text.choices[0].message.content
 
-# %%
 df = pd.read_csv("../original text.csv")
 paragraphs = df['paragraph'].values.tolist()
 paragraphs = paragraphs[14:]
 
-# %%
 all_gpt4_rewritten_text = []
 i = 0
 for line in tqdm(paragraphs):
@@ -51,11 +45,6 @@ for line in tqdm(paragraphs):
     print(rewritten_text)
     all_gpt4_rewritten_text.append(rewritten_text)
 
-
-
-# %%
 df1 = pd.DataFrame()
 df1["answer"] = all_gpt4_rewritten_text
 df1.to_csv("../GPT4_output.csv")
-
-
