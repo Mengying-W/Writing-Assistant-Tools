@@ -1,20 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
 import os
 from tqdm import tqdm
 
-
-# In[25]:
-
-
-df_central = pd.read_csv('/home/pop532211/WATs/central vecs/sentence/central_sen_points_xlnet.csv')
+df_central = pd.read_csv('../central_sen_points_xlnet.csv')
 df_central = df_central.drop(df_central.columns[0],axis=1)
 heads = df_central.columns.values.tolist()
 
@@ -33,10 +26,6 @@ for head in heads:
         digit_value.append(value)
     df_central_vec[head] = digit_value
 
-
-# In[26]:
-
-
 def getxlnetvecs(veclist):
 
     sensvecslist = veclist.split('],') #all sen vec list for every para
@@ -51,10 +40,6 @@ def getxlnetvecs(veclist):
         sensveclist.append(tem)
     return sensveclist
 
-
-# In[21]:
-
-
 def getLongformervecs(veclist):
 
     sensvecslist = veclist.split('],') #all sen vec list for every para
@@ -68,10 +53,6 @@ def getLongformervecs(veclist):
         print(tem)'''
         sensveclist.append(tem)
     return sensveclist
-
-
-# In[7]:
-
 
 def getsenBERTvecs(veclist):
     sensvecslist = veclist.strip("[").strip("]").split('array')
@@ -88,10 +69,6 @@ def getsenBERTvecs(veclist):
         float_vectors.append(item)
     return float_vectors
 
-
-# In[16]:
-
-
 def getALBERTvecs(veclist):
     sensvecslist = veclist.split('],') #all sen vec list for every para
     sensveclist = []
@@ -103,11 +80,7 @@ def getALBERTvecs(veclist):
         sensveclist.append(tem)
     return sensveclist
 
-
-# In[27]:
-
-
-df_central_all = pd.read_csv('/home/pop532211/WATs/processed/sentence/sen2vec_xlnet.csv')
+df_central_all = pd.read_csv('../sen2vec_xlnet.csv')
 df_central_all = df_central_all.drop(df_central_all.columns[0],axis=1)
 heads = df_central_all.columns.values.tolist()
 
@@ -124,10 +97,6 @@ for head in heads:
         vectors = getxlnetvecs(vectors_tem)
         float_vecs.append(vectors)
     df_allvec[head] = float_vecs
-
-
-# In[28]:
-
 
 df_cos = pd.DataFrame()
 df_euc = pd.DataFrame()
@@ -169,17 +138,6 @@ for head in heads:
     df_euc[head] = avg_euc
     df_euc1[head] = euc1
 
-
-# In[29]:
-
-
-df_cos.to_csv('/home/pop532211/WATs/average similarity/avg_sen_cos_xlnet.csv')
-df_euc.to_csv('/home/pop532211/WATs/average similarity/avg_sen_euc_xlnet.csv')
-df_euc1.to_csv('/home/pop532211/WATs/average similarity/avg_sen_euc1_xlnet.csv')
-
-
-# In[ ]:
-
-
-
-
+df_cos.to_csv('../avg_sen_cos_xlnet.csv')
+df_euc.to_csv('../avg_sen_euc_xlnet.csv')
+df_euc1.to_csv('../avg_sen_euc1_xlnet.csv')
