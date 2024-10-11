@@ -1,20 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
 import os
 from tqdm import tqdm
 
-
-# In[95]:
-
-
-df_central = pd.read_csv('/home/pop532211/WATs/meanvecs/word/meanvecs_gpt2-6.csv')
+df_central = pd.read_csv('../meanvecs_gpt2-6.csv')
 df_central = df_central.drop(df_central.columns[0],axis=1)
 heads = df_central.columns.values.tolist()
 
@@ -33,11 +26,7 @@ for head in heads:
         digit_value.append(value)
     df_central_vec[head] = digit_value
 
-
-# In[96]:
-
-
-df_central_all = pd.read_csv('/home/pop532211/WATs/processed/word/emvcOfgpt2-6.csv')
+df_central_all = pd.read_csv('../emvcOfgpt2-6.csv')
 df_central_all = df_central_all.drop(df_central_all.columns[0],axis=1)
 heads = df_central_all.columns.values.tolist()
 
@@ -54,10 +43,6 @@ for head in heads:
         vectors = getGPT2vecs(vectors_tem)
         float_vecs.append(vectors)
     df_allvec[head] = float_vecs
-
-
-# In[97]:
-
 
 df_cos = pd.DataFrame()
 
@@ -84,36 +69,24 @@ for head in heads:
         
     df_cos[head] = avg_cos
 
+df_cos.to_csv('../conicity_gpt2-6.csv')
 
-# In[98]:
-
-
-df_cos.to_csv('/home/pop532211/WATs/conicity/word/conicity_gpt2-6.csv')
-
-
-# In[100]:
-
-
-gpt21 = pd.read_csv('/home/pop532211/WATs/conicity/word/conicity_gpt2-1.csv')
+gpt21 = pd.read_csv('../conicity_gpt2-1.csv')
 gpt21 = gpt21.drop(gpt21.columns[0],axis=1)
-gpt22 = pd.read_csv('/home/pop532211/WATs/conicity/word/conicity_gpt2-2.csv')
+gpt22 = pd.read_csv('../conicity_gpt2-2.csv')
 gpt22 = gpt22.drop(gpt22.columns[0],axis=1)
-gpt23 = pd.read_csv('/home/pop532211/WATs/conicity/word/conicity_gpt2-3.csv')
+gpt23 = pd.read_csv('../conicity_gpt2-3.csv')
 gpt23 = gpt23.drop(gpt23.columns[0],axis=1)
-gpt24 = pd.read_csv('/home/pop532211/WATs/conicity/word/conicity_gpt2-4.csv')
+gpt24 = pd.read_csv('../conicity_gpt2-4.csv')
 gpt24 = gpt24.drop(gpt24.columns[0],axis=1)
-gpt25 = pd.read_csv('/home/pop532211/WATs/conicity/word/conicity_gpt2-5.csv')
+gpt25 = pd.read_csv('../conicity_gpt2-5.csv')
 gpt25 = gpt25.drop(gpt25.columns[0],axis=1)
-gpt26 = pd.read_csv('/home/pop532211/WATs/conicity/word/conicity_gpt2-6.csv')
+gpt26 = pd.read_csv('../conicity_gpt2-6.csv')
 gpt26 = gpt26.drop(gpt26.columns[0],axis=1)
 merged_df = pd.concat([gpt21, gpt22, gpt23,gpt24,gpt25,gpt26], ignore_index=True, axis=1)
 heads = ['Original','Rephrase','Grammarly','ChatGPT','Wordtune','Quillbot','Vicuna','GPT_4','Flan_T5_1','Flan_T5_2','Flan_T5_3','Flan_T5_4','Flan_T5_5','Flan_T5_6','Flan_T5_7','Flan_T5_8','Flan_T5_9','Flan_T5_10']
 merged_df.columns = heads
-merged_df.to_csv('/home/pop532211/WATs/conicity/word/conicity_gpt2.csv')
-
-
-# In[2]:
-
+merged_df.to_csv('../conicity_gpt2.csv')
 
 def getBERTcasevecs(veclist):
 
@@ -129,10 +102,6 @@ def getBERTcasevecs(veclist):
         sensveclist.append(tem)
     return sensveclist
 
-
-# In[3]:
-
-
 def getxlnetvecs(veclist):
 
     sensvecslist = veclist.split('],') #all sen vec list for every para
@@ -147,10 +116,6 @@ def getxlnetvecs(veclist):
         sensveclist.append(tem)
     return sensveclist
 
-
-# In[4]:
-
-
 def getLongformervecs(veclist):
 
     sensvecslist = veclist.split('],') #all sen vec list for every para
@@ -164,10 +129,6 @@ def getLongformervecs(veclist):
         print(tem)'''
         sensveclist.append(tem)
     return sensveclist
-
-
-# In[5]:
-
 
 def getsenBERTvecs(veclist):
     sensvecslist = veclist.strip("[").strip("]").split('array')
@@ -184,10 +145,6 @@ def getsenBERTvecs(veclist):
         float_vectors.append(item)
     return float_vectors
 
-
-# In[6]:
-
-
 def getALBERTvecs(veclist):
     sensvecslist = veclist.split('],') #all sen vec list for every para
     sensveclist = []
@@ -199,10 +156,6 @@ def getALBERTvecs(veclist):
         sensveclist.append(tem)
     return sensveclist
 
-
-# In[7]:
-
-
 def getGPT2vecs(veclist):
     sensvecslist = veclist.split('],') #all sen vec list for every para
     sensveclist = []
@@ -213,10 +166,3 @@ def getGPT2vecs(veclist):
         #print(tem)
         sensveclist.append(tem)
     return sensveclist
-
-
-# In[ ]:
-
-
-
-
