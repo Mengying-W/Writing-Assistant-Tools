@@ -1,36 +1,16 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import pandas as pd
 from tqdm import tqdm
-
-
-# In[2]:
-
-
 import torch
 # Load model directly
 from transformers import AutoTokenizer, AutoModelForMaskedLM
 
-
-# In[3]:
-
-
 tokenizer = AutoTokenizer.from_pretrained("bert-large-cased")
 model = AutoModelForMaskedLM.from_pretrained("bert-large-cased")
 
-
-# In[4]:
-
-
-df_original = pd.read_csv('/home/pop532211/WATs/generate_embeddings/annotated data6.csv')
-
-
-# In[5]:
-
+df_original = pd.read_csv('../annotated data6.csv')
 
 heads = df_original.columns.values.tolist()
 df_emvecOfaw = pd.DataFrame()
@@ -68,27 +48,4 @@ for head in heads:
         
     df_emvecOfaw[head] = words_embeddings
 
-
-# In[6]:
-
-
-df_emvecOfaw.to_csv('/home/pop532211/WATs/generate_embeddings/emvcOfbert-case6.csv')
-
-
-# In[28]:
-
-
-a = df_emvecOfaw["Flan_T5_2"].tolist()
-
-
-# In[30]:
-
-
-len(a[0])
-
-
-# In[ ]:
-
-
-
-
+df_emvecOfaw.to_csv('../emvcOfbert-case6.csv')
