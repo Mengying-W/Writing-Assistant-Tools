@@ -1,44 +1,21 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[42]:
-
-
 #!pip install torch
 #!pip install --upgrade transformers
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 print(torch.cuda.is_available())
 
-
-# In[43]:
-
-
 import pandas as pd
 from tqdm import tqdm
-
-
-# In[44]:
-
 
 gpt2_tokenizer = AutoTokenizer.from_pretrained("gpt2-xl")
 gpt2_model = AutoModelForCausalLM.from_pretrained("gpt2-xl", output_hidden_states=True)
 
-
-# In[45]:
-
-
 gpt2_model.to("cuda")
 
-
-# In[82]:
-
-
-df_original = pd.read_csv('/home/pop532211/WATs/generate_embeddings/annotated data6.csv')
-
-
-# In[83]:
-
+df_original = pd.read_csv('../annotated data6.csv')
 
 heads = df_original.columns.values.tolist()
 df_emvecOfaw = pd.DataFrame()
@@ -75,27 +52,4 @@ for head in heads:
         words_embeddings.append(word_embeddings)
     df_emvecOfaw[head] = words_embeddings
 
-
-# In[ ]:
-
-
-df_emvecOfaw.to_csv('/home/pop532211/WATs/generate_embeddings/emvcOfgpt2-6.csv')
-
-
-# In[70]:
-
-
-a = df_emvecOfaw["Quillbot"].tolist()
-
-
-# In[72]:
-
-
-len(a[0][0])
-
-
-# In[ ]:
-
-
-
-
+df_emvecOfaw.to_csv('..s/emvcOfgpt2-6.csv')
