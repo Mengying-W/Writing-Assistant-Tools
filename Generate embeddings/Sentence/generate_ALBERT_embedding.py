@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[13]:
-
-
 import torch
 from transformers import AlbertTokenizer, AlbertModel
 import pandas as pd
@@ -17,10 +14,6 @@ import numpy as np
 
 # Load model directly
 #from transformers import AutoTokenizer, AutoModelForMaskedLM
-
-
-# In[14]:
-
 
 # Define a function to compute the document embedding vector
 def get_document_embedding(document):
@@ -37,14 +30,9 @@ def get_document_embedding(document):
 
         # 获取嵌入向量
         embedding_vector = outputs.hidden_states[-1].mean(dim=1).squeeze().tolist()
-
         embeddings.append(embedding_vector)
         
     return embeddings
-
-
-# In[15]:
-
 
 # Load the pre-trained ALBERT model
 tokenizer = AlbertTokenizer.from_pretrained('albert-xxlarge-v2')
@@ -52,30 +40,12 @@ model = AlbertModel.from_pretrained('albert-xxlarge-v2')
 '''tokenizer = AutoTokenizer.from_pretrained("albert-xxlarge-v2")
 model = AutoModelForMaskedLM.from_pretrained("albert-xxlarge-v2")'''
 
-
-# In[16]:
-
-
 # Move the model to the GPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
-
-# In[17]:
-
-
-print(device)
-
-
-# In[18]:
-
-
-df = pd.read_csv('/home/pop532211/WATs/generate_embeddings/annotated data.csv')
+df = pd.read_csv('../annotated data.csv')
 heads = df.columns.values.tolist()
-
-
-# In[19]:
-
 
 # Define a function to compute the document embedding vector
 def get_document_embedding(document):
@@ -98,10 +68,6 @@ def get_document_embedding(document):
         
     return embeddings
 
-
-# In[21]:
-
-
 emvecs = pd.DataFrame()
 for head in heads:
     textlist = df[head].tolist()
@@ -113,15 +79,4 @@ for head in heads:
         emvec.append(embedding)
     emvecs[head] = emvec
 
-
-# In[22]:
-
-
-emvecs.to_csv('/home/pop532211/WATs/processed/sentence/sen2vec_ALBERT.csv')
-
-
-# In[ ]:
-
-
-
-
+emvecs.to_csv('../sen2vec_ALBERT.csv')
