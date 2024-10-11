@@ -19,7 +19,6 @@ model = XLNetModel.from_pretrained('xlnet-base-cased')'''
 tokenizer = AutoTokenizer.from_pretrained("xlnet-large-cased")
 model = AutoModelForCausalLM.from_pretrained("xlnet-large-cased")
 
-# %%
 # Define a function to compute the document embedding vector
 def get_document_embedding(document):
     sentences = sent_tokenize(document)
@@ -35,15 +34,12 @@ def get_document_embedding(document):
 
         # 获取嵌入向量
         embedding_vector = outputs.hidden_states[-1].mean(dim=1).squeeze().tolist()
-
         embeddings.append(embedding_vector)
         
     return embeddings
 
-# %%
-df = pd.read_csv('/home/pop532211/WATs/generate_embeddings/annotated data.csv')
+df = pd.read_csv('../annotated data.csv')
 
-# %%
 df_vec = pd.DataFrame()
 for index in df:
     para = df[index].tolist()
@@ -55,10 +51,4 @@ for index in df:
         final_vec.append(embedding)
     df_vec[index] = final_vec
 
-# %%
-df_vec.to_csv('/home/pop532211/WATs/processed/sentence/sen2vec_xlnet.csv')
-
-# %%
-
-
-
+df_vec.to_csv('../sen2vec_xlnet.csv')
