@@ -25,7 +25,7 @@ else:
     device = torch.device("cpu")
 
 # %%
-df = pd.read_csv("/home/pop532211/WATs/WATs-LLMs/original text.csv")
+df = pd.read_csv("../original text.csv")
 paragraphs = df['paragraph'].values.tolist() 
 #paragraphs = paragraphs[0:5]
 '''random.seed(10)
@@ -70,6 +70,6 @@ for i in range(10):
 
 
 # %%
-df1.to_csv('/home/pop532211/WATs/WATs-LLMs/flant5_output.csv')
+df1.to_csv('../flant5_output.csv')
 
 
