@@ -1,36 +1,16 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
-
-
 import pandas as pd
 from tqdm import tqdm
-
-
-# In[3]:
-
-
 import torch
 # Load model directly
 from transformers import AutoTokenizer, AutoModelForMaskedLM
 
-
-# In[4]:
-
-
-tokenizer = AutoTokenizer.from_pretrained("bert-large-uncased")
+kenizer = AutoTokenizer.from_pretrained("bert-large-uncased")
 model = AutoModelForMaskedLM.from_pretrained("bert-large-uncased")
 
-
-# In[5]:
-
-
-df_original = pd.read_csv('/home/pop532211/WATs/generate_embeddings/annotated data6.csv')
-
-
-# In[6]:
-
+df_original = pd.read_csv('../annotated data6.csv')
 
 heads = df_original.columns.values.tolist()
 df_emvecOfaw = pd.DataFrame()
@@ -68,27 +48,4 @@ for head in heads:
         
     df_emvecOfaw[head] = words_embeddings
 
-
-# In[7]:
-
-
-df_emvecOfaw.to_csv('/home/pop532211/WATs/generate_embeddings/emvcOfbert-uncase6.csv')
-
-
-# In[14]:
-
-
-a = df_emvecOfaw["Quillbot"].tolist()
-
-
-# In[16]:
-
-
-len(a[0][0])
-
-
-# In[ ]:
-
-
-
-
+df_emvecOfaw.to_csv('../emvcOfbert-uncase6.csv')
