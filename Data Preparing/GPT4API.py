@@ -36,7 +36,7 @@ def gpt_4(input):
     return rephrased_text.choices[0].message.content
 
 # %%
-df = pd.read_csv("/home/pop532211/WATs/WATs-LLMs/original text.csv")
+df = pd.read_csv("../original text.csv")
 paragraphs = df['paragraph'].values.tolist()
 paragraphs = paragraphs[14:]
 
@@ -56,6 +56,6 @@ for line in tqdm(paragraphs):
 # %%
 df1 = pd.DataFrame()
 df1["answer"] = all_gpt4_rewritten_text
-df1.to_csv("/home/pop532211/WATs/WATs-LLMs/GPT4_output.csv")
+df1.to_csv("../GPT4_output.csv")
 
 
