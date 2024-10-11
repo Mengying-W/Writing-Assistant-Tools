@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[5]:
-
-
 #!pip install -U sentence-transformers
 from sentence_transformers import SentenceTransformer
 import nltk
@@ -16,38 +13,15 @@ from tqdm import tqdm
 from sklearn_extra.cluster import KMedoids'''
 import numpy as np
 
-
-# In[3]:
-
-
 #!pip install -U sentence-transformers
-
-
-# In[6]:
-
 
 model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 
-
-# In[7]:
-
-
-df = pd.read_csv('/home/pop532211/WATs/generate_embeddings/annotated data.csv')
+df = pd.read_csv('../annotated data.csv')
 heads = df.columns.values.tolist()
-
-
-# In[8]:
-
 
 sentences = "I love the iron man!"
 sentence_embeddings = model.encode(sentences)
-
-print(len(sentence_embeddings))
-print(sentence_embeddings)
-
-
-# In[9]:
-
 
 emvecs = pd.DataFrame()
 for head in heads:
@@ -60,15 +34,4 @@ for head in heads:
         emvec.append( sentence_embeddings)
     emvecs[head] = emvec
 
-
-# In[10]:
-
-
-emvecs.to_csv('/home/pop532211/WATs/processed/paragraph/sen2vec_senBERT.csv')
-
-
-# In[ ]:
-
-
-
-
+emvecs.to_csv('../sen2vec_senBERT.csv')
