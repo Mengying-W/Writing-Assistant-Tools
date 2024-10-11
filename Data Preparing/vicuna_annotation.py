@@ -37,7 +37,7 @@ config = {
         'num_sequences': 2
     }
 }
-offload_folder = "/Users/carina/Downloads"
+offload_folder = ".."
 
 # %%
 model = AutoModelForCausalLM.from_pretrained(
@@ -52,7 +52,7 @@ model = AutoModelForCausalLM.from_pretrained(
 tokenizer = AutoTokenizer.from_pretrained(config['model']['model_checkpoint'], use_fast=True)
 
 # %%
-df = pd.read_csv("/home/pop532211/WATs/WATs-LLMs/original text.csv")
+df = pd.read_csv("../original text.csv")
 paragraphs = df['paragraph'].values.tolist()
 paragraphs = paragraphs[0:10]
 '''random.seed(42)
@@ -86,6 +86,6 @@ df1["answer"] = answers_vicuna_13b
 
 
 # %%
-df1.to_csv('/home/pop532211/WATs/WATs-LLMs/vicuna_output.csv')
+df1.to_csv('../vicuna_output.csv')
 
 
