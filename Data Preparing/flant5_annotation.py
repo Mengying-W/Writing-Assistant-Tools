@@ -1,19 +1,14 @@
-# %%
 #pip install accelerate
 
-
-# %%
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 import torch
 import pandas as pd
 import random
 from tqdm import tqdm
 
-# %%
 tokenizer_flant5 = T5Tokenizer.from_pretrained("google/flan-t5-xl")
 model_flant5 = T5ForConditionalGeneration.from_pretrained("google/flan-t5-xl", device_map="auto")
 
-# %%
 # Connect to GPU
 if torch.cuda.is_available():       
     device = torch.device("cuda")
@@ -24,14 +19,12 @@ else:
     print('No GPU available, using the CPU instead.')
     device = torch.device("cpu")
 
-# %%
 df = pd.read_csv("../original text.csv")
 paragraphs = df['paragraph'].values.tolist() 
 #paragraphs = paragraphs[0:5]
 '''random.seed(10)
 paragraphs = random.sample(paragraphs, 4)'''
 
-# %%
 print("new test")
 df1 = pd.DataFrame()
 df1['original'] = paragraphs
@@ -60,16 +53,8 @@ for i in range(10):
         
         answer = tokenizer_flant5.decode(output_ids, skip_special_tokens=True)
         answers_flant5.append(answer)
-        '''print("input:",paragraph)
-        print("----------------")
-        print("output:",answer)'''
         
     colomu_name = "answer" + str(i)
     df1[colomu_name] = answers_flant5
-
-
-
-# %%
+    
 df1.to_csv('../flant5_output.csv')
-
-
