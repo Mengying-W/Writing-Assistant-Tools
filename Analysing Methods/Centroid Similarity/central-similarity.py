@@ -1,33 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
 
-
-# In[2]:
-
-
-df = pd.read_csv('/Users/carina/Downloads/courses/paper/central vecs/word/central_emvcOfbert-case.csv')
+df = pd.read_csv('../central_emvcOfbert-case.csv')
 df = df.drop(df.columns[0],axis=1)
 #df.head()
 heads = df.columns.values.tolist()
-
-
-# In[3]:
-
-
-a = df['Original'].tolist()
-b = a[0]
-b
-
-
-# In[4]:
-
 
 df_vec = pd.DataFrame()
 heads = df.columns.values.tolist()    # 列名称
@@ -40,19 +21,10 @@ for index in heads:
         item = [float(x) for x in item]
         digit_value.append(item)
     df_vec[index] = digit_value
-
-
-# In[5]:
-
-
-paragraph = df_vec['Original'].tolist()
+aragraph = df_vec['Original'].tolist()
 paragraph = np.array(paragraph)
 
-
-# In[6]:
-
-
-df_cos = pd.DataFrame()
+f_cos = pd.DataFrame()
 df_euc = pd.DataFrame()
 df_euc1 = pd.DataFrame()
 
@@ -79,17 +51,6 @@ df_cos = df_cos.drop(df_cos.columns[0],axis=1)
 df_euc = df_euc.drop(df_euc.columns[0],axis=1)
 df_euc1 = df_euc1.drop(df_euc1.columns[0],axis=1)
 
-
-# In[7]:
-
-
-df_cos.to_csv('/Users/carina/Downloads/courses/paper/central similarity/word/emvcOfbert-case_cos.csv')
-df_euc1.to_csv('/Users/carina/Downloads/courses/paper/central similarity/word/emvcOfbert-case_euc.csv')
-df_euc.to_csv('/Users/carina/Downloads/courses/paper/central similarity/word/emvcOfbert-case_unmorlized_euc.csv')
-
-
-# In[ ]:
-
-
-
-
+df_cos.to_csv('../emvcOfbert-case_cos.csv')
+df_euc1.to_csv('../emvcOfbert-case_euc.csv')
+df_euc.to_csv('../emvcOfbert-case_unmorlized_euc.csv')
