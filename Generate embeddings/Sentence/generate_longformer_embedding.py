@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import torch
 from transformers import LongformerTokenizer, LongformerModel
 import pandas as pd
@@ -15,25 +12,13 @@ import nltk
 nltk.download('punkt')
 from nltk.tokenize import sent_tokenize
 
-
-# In[2]:
-
-
 # Load the Longformer tokenizer and model
 model = LongformerModel.from_pretrained("allenai/longformer-large-4096")
 tokenizer = LongformerTokenizer.from_pretrained("allenai/longformer-large-4096")
 
-
-# In[14]:
-
-
 # Move the model to the GPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
-
-
-# In[15]:
-
 
 # Define a function to compute the document embedding vector
 def get_document_embedding(document):
@@ -56,15 +41,7 @@ def get_document_embedding(document):
         
     return embeddings
 
-
-# In[16]:
-
-
-df = pd.read_csv('/home/pop532211/WATs/generate_embeddings/annotated data.csv')
-
-
-# In[18]:
-
+df = pd.read_csv('../annotated data.csv')
 
 df_vec = pd.DataFrame()
 for index in df:
@@ -76,16 +53,5 @@ for index in df:
         embedding = get_document_embedding(document)
         final_vec.append(embedding)
     df_vec[index] = final_vec
-
-
-# In[19]:
-
-
-df_vec.to_csv('/home/pop532211/WATs/processed/sentence/sen2vec_longformer.csv')
-
-
-# In[ ]:
-
-
-
-
+    
+df_vec.to_csv('../sen2vec_longformer.csv')
