@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 #from transformers import XLNetTokenizer, XLNetModel
 import numpy as np
 import torch
@@ -12,19 +9,11 @@ from tqdm import tqdm
 # Load model directly
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-
-# In[2]:
-
-
 # Load XLNet tokenizer and model
 '''tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
 model = XLNetModel.from_pretrained('xlnet-base-cased')'''
 tokenizer = AutoTokenizer.from_pretrained("xlnet-large-cased")
 model = AutoModelForCausalLM.from_pretrained("xlnet-large-cased")
-
-
-# In[38]:
-
 
 def get_document_embedding(document):
 
@@ -40,15 +29,7 @@ def get_document_embedding(document):
 
     return embedding_vector
 
-
-# In[39]:
-
-
-df = pd.read_csv('/home/pop532211/WATs/generate_embeddings/annotated data.csv')
-
-
-# In[40]:
-
+df = pd.read_csv('../annotated data.csv')
 
 df_vec = pd.DataFrame()
 for index in df:
@@ -60,15 +41,4 @@ for index in df:
         final_vec.append(embedding)
     df_vec[index] = final_vec
 
-
-# In[41]:
-
-
-df_vec.to_csv('/home/pop532211/WATs/processed/paragraph/doc2vec_xlnet.csv')
-
-
-# In[ ]:
-
-
-
-
+df_vec.to_csv('../doc2vec_xlnet.csv')
