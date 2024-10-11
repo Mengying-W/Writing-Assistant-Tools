@@ -1,11 +1,9 @@
-# %%
 from scipy.spatial import ConvexHull
 from sklearn.decomposition import PCA
 import pandas as pd
 from tqdm import tqdm
 import os
 
-# %%
 def get_convex_hull_volume(sent_embeddings):
     
     lenOfpoints = len(sent_embeddings)
@@ -18,9 +16,6 @@ def get_convex_hull_volume(sent_embeddings):
     hull = ConvexHull(cluster_embs)
     return hull.volume
 
-
-
-# %%
 def getBERTcasevecs(veclist):
 
     sensvecslist = veclist.split('],') #all sen vec list for every para
@@ -35,8 +30,7 @@ def getBERTcasevecs(veclist):
         sensveclist.append(tem)
     return sensveclist
 
-# %%
-base = '/home/pop532211/WATs/processed/word'
+base = '..'
 
 for root, ds, fs in os.walk(base):
     for f in fs:
@@ -69,15 +63,10 @@ for root, ds, fs in os.walk(base):
             all_volume[head] = volumes
 
         filename = str(f)[6:]
-        resultsfolder = '/home/pop532211/WATs/convexhull volume/word/'
+        resultsfolder = '../word/'
 
         func = 'volume_'
         filenames = func + filename
         resultspath = os.path.join(resultsfolder, filenames)
         print(resultspath)
         all_volume.to_csv(resultspath)
-
-# %%
-
-
-
