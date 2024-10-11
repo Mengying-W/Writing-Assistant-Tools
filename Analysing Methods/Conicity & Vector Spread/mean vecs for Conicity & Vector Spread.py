@@ -1,27 +1,16 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn_extra.cluster import KMedoids
 import numpy as np
 from tqdm import tqdm
 
-
-# In[42]:
-
-
-df = pd.read_csv('/home/pop532211/WATs/processed/word/emvcOfgpt2-6.csv')
+df = pd.read_csv('../emvcOfgpt2-6.csv')
 df = df.drop(df.columns[0],axis=1)
 #df.head()
 heads = df.columns.values.tolist()
-
-
-# In[43]:
-
 
 all_average_points = pd.DataFrame()
 for head in heads:
@@ -50,17 +39,7 @@ for head in heads:
 
     print(len(average_points))
     all_average_points[head] = average_points
-all_average_points.to_csv('/home/pop532211/WATs/meanvecs/word/meanvecs_gpt2-6.csv')
-
-
-# In[ ]:
-
-
-
-
-
-# In[2]:
-
+all_average_points.to_csv('../meanvecs_gpt2-6.csv')
 
 def getGPT2vecs(veclist):
     sensvecslist = veclist.split('],') #all sen vec list for every para
@@ -72,10 +51,6 @@ def getGPT2vecs(veclist):
         #print(tem)
         sensveclist.append(tem)
     return sensveclist
-
-
-# In[3]:
-
 
 def getBERTcasevecs(veclist):
 
@@ -90,10 +65,6 @@ def getBERTcasevecs(veclist):
         #print(tem)
         sensveclist.append(tem)
     return sensveclist
-
-
-# In[4]:
-
 
 def getsenBERTvecs(veclist):
     sensvecslist = veclist.strip("[").strip("]").split('array')
@@ -110,10 +81,6 @@ def getsenBERTvecs(veclist):
         float_vectors.append(item)
     return float_vectors
 
-
-# In[5]:
-
-
 def getLongformervecs(veclist):
 
     sensvecslist = veclist.split('],') #all sen vec list for every para
@@ -128,10 +95,6 @@ def getLongformervecs(veclist):
         sensveclist.append(tem)
     return sensveclist
 
-
-# In[6]:
-
-
 def getALBERTvecs(veclist):
     sensvecslist = veclist.split('],') #all sen vec list for every para
     sensveclist = []
@@ -142,10 +105,6 @@ def getALBERTvecs(veclist):
         #print(tem)
         sensveclist.append(tem)
     return sensveclist
-
-
-# In[7]:
-
 
 def getxlnetvecs(veclist):
 
@@ -160,10 +119,3 @@ def getxlnetvecs(veclist):
         print(tem)'''
         sensveclist.append(tem)
     return sensveclist
-
-
-# In[ ]:
-
-
-
-
