@@ -1,18 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn_extra.cluster import KMedoids
 import numpy as np
 from tqdm import tqdm
-
-
-# In[2]:
-
 
 def getBERTcasevecs(veclist):
 
@@ -28,18 +21,10 @@ def getBERTcasevecs(veclist):
         sensveclist.append(tem)
     return sensveclist
 
-
-# In[5]:
-
-
 filenames = ['emvcOfbert-uncase2.csv','emvcOfbert-uncase3.csv','emvcOfbert-uncase4.csv','emvcOfbert-uncase5.csv','emvcOfbert-uncase6.csv']
 
-
-# In[6]:
-
-
 for filename in filenames:
-    full_path = '/home/pop532211/WATs/processed/word/' + filename
+    full_path = '../' + filename
     df = pd.read_csv(full_path)
     df = df.drop(df.columns[0],axis=1)
     #df.head()
@@ -71,13 +56,5 @@ for filename in filenames:
             #Print the results
             #print("Medoids:\n", medoids)
         all_central_points[head] = central_points
-    save_path = '/home/pop532211/WATs/central vecs/sentence/word/central_' + filename
+    save_path = '../central_' + filename
     all_central_points.to_csv(save_path)
-   
-
-
-# In[ ]:
-
-
-
-
