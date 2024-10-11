@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 #!pip install -U sentence-transformers
 from sentence_transformers import SentenceTransformer
 import nltk
@@ -16,22 +13,10 @@ from tqdm import tqdm
 from sklearn_extra.cluster import KMedoids'''
 import numpy as np
 
-
-# In[2]:
-
-
 model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 
-
-# In[3]:
-
-
-df = pd.read_csv('/home/pop532211/WATs/generate_embeddings/annotated data.csv')
+df = pd.read_csv('../annotated data.csv')
 heads = df.columns.values.tolist()
-
-
-# In[9]:
-
 
 emvecs = pd.DataFrame()
 numOfsens = pd.DataFrame()
@@ -57,21 +42,6 @@ for head in heads:
     emvecs[head] = emvec
     numOfsens[head] = numOfsen
 
+emvecs.to_csv('../sen2vec_senBERT.csv')
 
-# In[10]:
-
-
-emvecs.to_csv('/home/pop532211/WATs/processed/sentence/sen2vec_senBERT.csv')
-
-
-# In[11]:
-
-
-numOfsens.to_csv('/home/pop532211/WATs/processed/sentence/sen_num.csv')
-
-
-# In[ ]:
-
-
-
-
+numOfsens.to_csv('../sen_num.csv')
