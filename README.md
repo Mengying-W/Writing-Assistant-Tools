@@ -2,7 +2,7 @@
 
 This repository contains the datasets and essential code used in the project. The project is structured into three main components:
 
-1. **Data Preparing**: This section includes the process of generating rephrased text using three large language models (LLMs).
+1. **Data Preparing**: This section includes the process of generating rephrased text using 4 Writing Assistant Tools and six large language models (LLMs).
 2. **Embedding Generation**: Here, we utilize various language models to generate embedding vectors for text at three different levels of granularity (word, sentence, paragraph).
 3. **Analysing Methods**: This part contains various methods for analyzing the text data.
 
